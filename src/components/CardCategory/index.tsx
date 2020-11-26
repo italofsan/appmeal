@@ -8,7 +8,14 @@ import Typography from '@material-ui/core/Typography';
 
 import { useHistory } from 'react-router-dom';
 
-const CardCategory: React.FC = () => {
+interface IProps {
+  id?: string;
+  name: string;
+  description: string;
+  thumb: string;
+}
+
+const CardCategory: React.FC<IProps> = ({ id, name, description, thumb }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -18,17 +25,11 @@ const CardCategory: React.FC = () => {
       onClick={() => history.push('/categories/listmeals')}
     >
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image='https://www.themealdb.com/images/category/beef.png'
-          title='Beef'
-        />
+        <CardMedia className={classes.media} image={thumb} title={name} />
         <CardContent>
-          <Typography className={classes.cardTitle}>Beef</Typography>
+          <Typography className={classes.cardTitle}>{name}</Typography>
           <Typography className={classes.cardSubtitle}>
-            "Beef is the culinary name for meat from cattle, particularly
-            skeletal muscle. Humans have been eating beef since prehistoric
-            times."
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>

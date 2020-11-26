@@ -30,8 +30,8 @@ const Categories: React.FC = () => {
       await api.get('/categories.php').then((response) => {
         console.log(response);
         const { data } = response;
-        console.log(data);
-        setCategories((categories) => [...categories, data.categories]);
+        console.log(data.categories);
+        setCategories(data.categories);
       });
     } catch (error) {
       alert(error.message);
@@ -65,10 +65,17 @@ const Categories: React.FC = () => {
             display: 'flex',
           }}
         >
-          {/* {categories.map((category, index) => {
-            return <Typography key={index}>{category.strCategory}</Typography>;
-          })} */}
-          <Grid
+          {categories.map((category: ICategory, index: number) => (
+            <CardCategory
+              key={index}
+              id={category.idCategory}
+              name={category.strCategory}
+              description={category.strCategoryDescription}
+              thumb={category.strCategoryThumb}
+            />
+          ))}
+          {console.log(categories)}
+          {/* <Grid
             item
             xs={6}
             xl={4}
@@ -145,7 +152,7 @@ const Categories: React.FC = () => {
             }}
           >
             <CardCategory />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </div>
