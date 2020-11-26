@@ -67,7 +67,7 @@ const Categories: React.FC = () => {
         >
           {categories.map((category: ICategory, index: number) => (
             <CardCategory
-              key={index}
+              key={category.idCategory}
               id={category.idCategory}
               name={category.strCategory}
               description={category.strCategoryDescription}
