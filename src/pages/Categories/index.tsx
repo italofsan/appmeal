@@ -20,12 +20,12 @@ const Categories: React.FC = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
-    fetchSomething();
+    fetchCategories();
 
     return console.log(categories);
   }, []);
 
-  const fetchSomething = async () => {
+  const fetchCategories = async () => {
     try {
       await api.get('/categories.php').then((response) => {
         console.log(response);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -6,9 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   id?: string;
   name: string;
   description: string;
@@ -22,7 +22,14 @@ const CardCategory: React.FC<IProps> = ({ id, name, description, thumb }) => {
   return (
     <Card
       className={classes.root}
-      onClick={() => history.push('/categories/listmeals')}
+      onClick={() =>
+        history.push({
+          pathname: '/categories/listmeals',
+          state: {
+            name: name,
+          },
+        })
+      }
     >
       <CardActionArea>
         <CardMedia className={classes.media} image={thumb} title={name} />
@@ -37,7 +44,7 @@ const CardCategory: React.FC<IProps> = ({ id, name, description, thumb }) => {
   );
 };
 
-export default CardCategory;
+export default withRouter(CardCategory);
 
 const useStyles = makeStyles({
   root: {
