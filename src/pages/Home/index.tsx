@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Header from '../../components/Header';
 import CardCategory from '../../components/CardCategory';
 
+import loadingImage from '../../assets/loading.gif';
 import api from '../../services/api';
 
 interface ICategory {
@@ -16,10 +17,11 @@ interface ICategory {
 
 const Home: React.FC = () => {
   const classes = useStyles();
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
+    setLoading(true);
     fetchCategories();
   }, []);
 
@@ -28,11 +30,48 @@ const Home: React.FC = () => {
       await api.get('/categories.php').then((response) => {
         const { data } = response;
         setCategories(data.categories);
+        setLoading(false);
       });
     } catch (error) {
+      setLoading(false);
       alert(error.message);
     }
   };
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <Grid
+          item
+          xl={12}
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
+          <div className={classes.welcomeTitle}>
+            <Typography className={classes.welcomeTitleText}>
+              Welcome!
+            </Typography>
+            <Typography className={classes.welcomeSubtitleText}>
+              Choose your recipes by category
+            </Typography>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xl={12}
+          xs={12}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={loadingImage} alt='Loading Image' />
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <div className={classes.root}>

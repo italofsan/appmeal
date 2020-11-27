@@ -3,9 +3,10 @@ import { Button, Grid, Link, Typography } from '@material-ui/core';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
-import api from '../../services/api';
-
 import Header from '../../components/Header';
+
+import loadingImage from '../../assets/loading.gif';
+import api from '../../services/api';
 
 interface IProps {
   id: string;
@@ -24,8 +25,10 @@ const Details: React.FC = () => {
   const classes = useStyles();
   const location = useLocation<IProps>();
   const [meal, setMeal] = useState<IMeal>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     fetchMeal();
   }, []);
 
@@ -42,18 +45,43 @@ const Details: React.FC = () => {
           strInstructions: meals[0].strInstructions,
           strYoutube: meals[0].strYoutube,
         });
-        console.log(meals[0]);
+        setLoading(false);
       });
     } catch (error) {
+      setLoading(false);
       alert(error.message);
     }
   };
 
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <Grid
+          item
+          xl={12}
+          xs={12}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={loadingImage} alt='Loading Image' />
+        </Grid>
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
-      <Grid xs={12} xl={12} className={classes.contentContainer}>
-        <img src={meal?.strMealThumb} className={classes.contentImage} />
+      <Grid item xs={12} xl={12} className={classes.contentContainer}>
+        <img
+          src={meal?.strMealThumb}
+          className={classes.contentImage}
+          alt={meal?.strMeal}
+        />
         <Grid item xs={12} className={classes.content}>
           <Typography className={classes.contentName}>
             {meal?.strMeal}
@@ -106,7 +134,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: 'rgba(255, 255, 255, 0.6)',
       padding: 20,
       borderRadius: 20,
-      height: '60vh',
+      height: '65vh',
       [theme.breakpoints.down('sm')]: {
         position: 'relative',
         height: 300,

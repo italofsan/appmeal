@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, BottomNavigation } from '@material-ui/core';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { useLocation, withRouter } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import ListPages from '../../components/ListPages';
 import CardMeal from '../../components/CardMeal';
 import Header from '../../components/Header';
 
+import loadingImage from '../../assets/loading.gif';
 import api from '../../services/api';
 
 interface IProps {
@@ -28,18 +29,17 @@ const MealsList: React.FC = () => {
   const [mealsPerPage, setMealsPerPage] = useState<number>(10);
 
   useEffect(() => {
+    setLoading(true);
     fetchMeals();
   }, []);
 
   const fetchMeals = async () => {
-    setLoading(true);
     try {
       api.get(`/filter.php?c=${location.state.name}`).then((response) => {
         const { data } = response;
         setMeals(data.meals);
-        console.log(data.meals);
+        setLoading(false);
       });
-      setLoading(false);
     } catch (error) {
       setLoading(false);
       alert(error.message);
@@ -53,17 +53,38 @@ const MealsList: React.FC = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return (
+      <>
+        <Header />
+        <Grid
+          item
+          xl={12}
+          xs={12}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={loadingImage} alt='Loading Image' />
+        </Grid>
+      </>
+    );
   }
 
   return (
-    <Grid container className={classes.container}>
+    <>
       <Header />
+
       <Grid
         item
         xl={12}
         xs={12}
-        style={{ display: 'flex', justifyContent: 'center' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          backgroundColor: '#FFCF99',
+        }}
       >
         <div className={classes.title}>
           <Typography className={classes.titleText}>Category</Typography>
@@ -72,41 +93,46 @@ const MealsList: React.FC = () => {
           </Typography>
         </div>
       </Grid>
-      <Grid
-        item
-        xl={12}
-        xs={12}
-        style={{
-          width: '100%',
-          flexWrap: 'wrap',
-          display: 'flex',
-        }}
-      >
-        {currentMeals.map((meal: IMeals) => (
-          <Grid
-            item
-            xs={12}
-            lg={6}
-            md={6}
-            xl={6}
-            className={classes.card}
-            key={meal.idMeal}
-          >
-            <CardMeal
+
+      <Grid container className={classes.container}>
+        <Grid
+          item
+          xl={12}
+          xs={12}
+          style={{
+            width: '100%',
+            flexWrap: 'wrap',
+            display: 'flex',
+            height: '100%',
+          }}
+        >
+          {currentMeals.map((meal: IMeals) => (
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              md={6}
+              xl={6}
+              className={classes.card}
               key={meal.idMeal}
-              id={meal.idMeal}
-              name={meal.strMeal}
-              thumb={meal.strMealThumb}
-            />
-          </Grid>
-        ))}
+            >
+              <CardMeal
+                key={meal.idMeal}
+                id={meal.idMeal}
+                name={meal.strMeal}
+                thumb={meal.strMealThumb}
+              />
+            </Grid>
+          ))}
+        </Grid>
+
+        <ListPages
+          mealsPerPage={mealsPerPage}
+          totalMeals={meals.length}
+          paginate={paginate}
+        />
       </Grid>
-      <ListPages
-        mealsPerPage={mealsPerPage}
-        totalMeals={meals.length}
-        paginate={paginate}
-      />
-    </Grid>
+    </>
   );
 };
 
@@ -117,6 +143,9 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       backgroundColor: '#FFCF99',
       height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
     },
     title: {
       display: 'flex',
