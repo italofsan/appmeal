@@ -58,7 +58,7 @@ export default withRouter(CardCategory);
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      height: 320,
+      height: 300,
       width: '100%',
       boxShadow: '0 0 2px 1px brown',
       [theme.breakpoints.down('sm')]: {
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     media: {
       width: '40%',
-      height: 320,
+      height: 300,
       [theme.breakpoints.down('sm')]: {
         height: 80,
         width: '40%',
@@ -76,8 +76,11 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     content: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
       width: '60%',
-      height: 320,
+      height: 300,
       [theme.breakpoints.down('sm')]: {
         height: 140,
         width: '60%',

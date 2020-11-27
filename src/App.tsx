@@ -21,4 +21,9 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: ['Merienda'].join(','),
   },
+  palette: {
+    secondary: {
+      main: '#721121',
+    },
+  },
 });

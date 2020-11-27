@@ -46,10 +46,10 @@ const Home: React.FC = () => {
         >
           <div className={classes.welcomeTitle}>
             <Typography className={classes.welcomeTitleText}>
-              Seja bem-vindo!
+              Welcome!
             </Typography>
             <Typography className={classes.welcomeSubtitleText}>
-              Escolha suas receitas por categoria
+              Choose your recipes by category
             </Typography>
           </div>
         </Grid>
@@ -107,6 +107,7 @@ const useStyles = makeStyles({
   welcomeTitleText: {
     flexGrow: 1,
     fontSize: 48,
+    textAlign: 'center',
   },
   welcomeSubtitleText: {
     flexGrow: 1,

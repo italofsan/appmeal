@@ -34,8 +34,8 @@ const CardMeal: React.FC<IProps> = ({ id, name, thumb }) => {
         <Typography className={classes.cardTitle}>{name}</Typography>
         <Button
           size='small'
-          variant='contained'
-          className={classes.button}
+          variant='outlined'
+          color='secondary'
           onClick={() =>
             history.push({
               pathname: `/categories/${name}/${id}`,
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       display: 'flex',
       flexDirection: 'row',
-      height: 320,
+      height: 220,
       width: '100%',
       boxShadow: '0 0 2px 1px brown',
       [theme.breakpoints.down('sm')]: {
@@ -69,22 +69,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     media: {
       width: '100%',
-      height: 320,
+      height: 220,
       [theme.breakpoints.down('sm')]: {
         height: 140,
         width: '100%',
         alignSelf: 'center',
       },
     },
-    button: {
-      backgroundColor: '#FFC07F',
-    },
     content: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
       width: '60%',
-      height: 320,
+      height: 220,
       [theme.breakpoints.down('sm')]: {
         height: 140,
         width: '60%',

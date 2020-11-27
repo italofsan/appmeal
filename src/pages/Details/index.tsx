@@ -42,6 +42,7 @@ const Details: React.FC = () => {
           strInstructions: meals[0].strInstructions,
           strYoutube: meals[0].strYoutube,
         });
+        console.log(meals[0]);
       });
     } catch (error) {
       alert(error.message);
@@ -64,13 +65,20 @@ const Details: React.FC = () => {
             <Typography className={classes.instructionsTitle}>
               Instructions
             </Typography>
-            <Typography className={classes.contentInstructions}>
-              {meal?.strInstructions}
-            </Typography>
+            <div className={classes.contentInstructionsContainer}>
+              <Typography className={classes.contentInstructions}>
+                {meal?.strInstructions}
+              </Typography>
+            </div>
           </div>
           <div className={classes.buttonContainer}>
-            <Button>See the video</Button>
-            {/* <Link href={meal?.strYoutube}>See the video</Link> */}
+            <Button variant='outlined' color='secondary' size='small'>
+              <Link href={meal?.strYoutube} target='_blank' underline='none'>
+                <Typography className={classes.buttonText}>
+                  See the video
+                </Typography>
+              </Link>
+            </Button>
           </div>
         </Grid>
       </Grid>
@@ -98,6 +106,13 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: 'rgba(255, 255, 255, 0.6)',
       padding: 20,
       borderRadius: 20,
+      height: '60vh',
+      [theme.breakpoints.down('sm')]: {
+        position: 'relative',
+        height: 300,
+        width: '100%',
+        borderRadius: 0,
+      },
     },
     contentImage: {
       width: '100%',
@@ -127,8 +142,11 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 24,
       margin: 10,
     },
+    contentInstructionsContainer: {
+      overflow: 'auto',
+      height: '30vh',
+    },
     contentInstructions: {
-      flexGrow: 1,
       textAlign: 'justify',
     },
     buttonContainer: {
@@ -136,6 +154,10 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'flex-end',
       marginTop: 10,
+    },
+    buttonText: {
+      color: '#000',
+      fontSize: 12,
     },
   })
 );
