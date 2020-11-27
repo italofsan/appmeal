@@ -59,8 +59,8 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       display: 'flex',
       flexDirection: 'row',
-      maxHeight: 320,
-      maxWidth: 1000,
+      height: 320,
+      width: '100%',
       boxShadow: '0 0 2px 1px brown',
       [theme.breakpoints.down('sm')]: {
         height: 140,
@@ -68,6 +68,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     media: {
+      width: '100%',
+      height: 320,
       [theme.breakpoints.down('sm')]: {
         height: 140,
         width: '100%',
@@ -81,6 +83,8 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
+      width: '60%',
+      height: 320,
       [theme.breakpoints.down('sm')]: {
         height: 140,
         width: '60%',

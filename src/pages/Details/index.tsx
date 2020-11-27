@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Link, Typography } from '@material-ui/core';
+import { Button, Grid, Link, Typography } from '@material-ui/core';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
@@ -68,7 +68,10 @@ const Details: React.FC = () => {
               {meal?.strInstructions}
             </Typography>
           </div>
-          <Link href={meal?.strYoutube}>See the video</Link>
+          <div className={classes.buttonContainer}>
+            <Button>See the video</Button>
+            {/* <Link href={meal?.strYoutube}>See the video</Link> */}
+          </div>
         </Grid>
       </Grid>
     </>
@@ -82,6 +85,7 @@ const useStyles = makeStyles((theme: Theme) =>
     contentContainer: {
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#FFCF99',
       width: '100%',
@@ -89,11 +93,19 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       display: 'flex',
       flexDirection: 'column',
-      width: '90%',
+      width: '30%',
+      position: 'absolute',
+      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+      padding: 20,
+      borderRadius: 20,
     },
     contentImage: {
-      height: 300,
       width: '100%',
+      height: '100vh',
+      [theme.breakpoints.down('sm')]: {
+        height: 300,
+        width: '100%',
+      },
     },
     contentName: {
       flexGrow: 1,
@@ -118,6 +130,12 @@ const useStyles = makeStyles((theme: Theme) =>
     contentInstructions: {
       flexGrow: 1,
       textAlign: 'justify',
+    },
+    buttonContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      marginTop: 10,
     },
   })
 );

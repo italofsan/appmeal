@@ -70,12 +70,7 @@ const Home: React.FC = () => {
               lg={6}
               md={6}
               xl={6}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                padding: 10,
-              }}
+              className={classes.card}
               key={category.idCategory}
             >
               <CardCategory
@@ -98,12 +93,11 @@ export default Home;
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    backgroundColor: '#FFCF99',
   },
   container: {
-    backgroundColor: '#FFCF99',
     height: '100%',
   },
-
   welcomeTitle: {
     display: 'flex',
     flexDirection: 'column',
@@ -118,5 +112,11 @@ const useStyles = makeStyles({
     flexGrow: 1,
     fontSize: 24,
     textAlign: 'center',
+  },
+  card: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
   },
 });

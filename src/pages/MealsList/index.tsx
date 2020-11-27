@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { useLocation, useHistory, withRouter } from 'react-router-dom';
+import { useLocation, withRouter } from 'react-router-dom';
 
 import CardMeal from '../../components/CardMeal';
 import Header from '../../components/Header';
@@ -19,7 +19,6 @@ interface IMeals {
 
 const MealsList: React.FC = () => {
   const classes = useStyles();
-  const history = useHistory();
   const location = useLocation<IProps>();
   const [meals, setMeals] = useState<IMeals[]>([]);
 
@@ -65,18 +64,7 @@ const MealsList: React.FC = () => {
         }}
       >
         {meals.map((meal: IMeals) => (
-          <Grid
-            item
-            xs={12}
-            xl={6}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              padding: 10,
-            }}
-            key={meal.idMeal}
-          >
+          <Grid item xs={12} xl={6} className={classes.card} key={meal.idMeal}>
             <CardMeal
               key={meal.idMeal}
               id={meal.idMeal}
@@ -111,6 +99,12 @@ const useStyles = makeStyles((theme: Theme) =>
     subtitleText: {
       flexGrow: 1,
       fontSize: 24,
+    },
+    card: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      padding: 10,
     },
   })
 );
