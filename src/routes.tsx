@@ -1,17 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Meals from './pages/Meals';
+import Home from './pages/Home';
+import MealsList from './pages/MealsList';
+import Login from './pages/Login';
 import Details from './pages/Details';
-import Categories from './pages/Categories';
 
 const src: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/' component={Categories} exact />
-        <Route path='/categories/listmeals' component={Meals} exact />
-        <Route path='/mealName/details' component={Details} exact />
+        <Route path='/' component={Login} exact />
+        <Route path='/home' component={Home} exact />
+        <Route path='/categories/:name' component={MealsList} exact />
+        <Route path='/categories/:name/:id' component={Details} exact />
       </Switch>
     </BrowserRouter>
   );
