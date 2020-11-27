@@ -43,7 +43,7 @@ const Home: React.FC = () => {
       <>
         <Header />
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{ display: 'flex', justifyContent: 'center' }}
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
           </div>
         </Grid>
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{
@@ -67,7 +67,7 @@ const Home: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          <img src={loadingImage} alt='Loading Image' />
+          <img src={loadingImage} alt='Loading' />
         </Grid>
       </>
     );
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
       <Grid container className={classes.container}>
         <Header />
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{ display: 'flex', justifyContent: 'center' }}
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
           </div>
         </Grid>
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{
@@ -104,7 +104,7 @@ const Home: React.FC = () => {
         >
           {categories.map((category: ICategory) => (
             <Grid
-              item
+              item={true}
               xs={12}
               lg={6}
               md={6}

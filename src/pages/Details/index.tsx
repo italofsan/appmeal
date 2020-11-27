@@ -58,7 +58,7 @@ const Details: React.FC = () => {
       <>
         <Header />
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{
@@ -67,7 +67,7 @@ const Details: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          <img src={loadingImage} alt='Loading Image' />
+          <img src={loadingImage} />
         </Grid>
       </>
     );
@@ -76,13 +76,9 @@ const Details: React.FC = () => {
   return (
     <>
       <Header />
-      <Grid item xs={12} xl={12} className={classes.contentContainer}>
-        <img
-          src={meal?.strMealThumb}
-          className={classes.contentImage}
-          alt={meal?.strMeal}
-        />
-        <Grid item xs={12} className={classes.content}>
+      <Grid item={true} xs={12} xl={12} className={classes.contentContainer}>
+        <img src={meal?.strMealThumb} className={classes.contentImage} />
+        <Grid item={true} xs={12} className={classes.content}>
           <Typography className={classes.contentName}>
             {meal?.strMeal}
           </Typography>

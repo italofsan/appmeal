@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, BottomNavigation } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { useLocation, withRouter } from 'react-router-dom';
 
@@ -26,12 +26,12 @@ const MealsList: React.FC = () => {
   const [meals, setMeals] = useState<IMeals[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [mealsPerPage, setMealsPerPage] = useState<number>(10);
+  const [mealsPerPage] = useState<number>(10);
 
   useEffect(() => {
     setLoading(true);
     fetchMeals();
-  }, []);
+  });
 
   const fetchMeals = async () => {
     try {
@@ -57,7 +57,7 @@ const MealsList: React.FC = () => {
       <>
         <Header />
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{
@@ -66,7 +66,7 @@ const MealsList: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          <img src={loadingImage} alt='Loading Image' />
+          <img src={loadingImage} alt='Loading' />
         </Grid>
       </>
     );
@@ -77,7 +77,7 @@ const MealsList: React.FC = () => {
       <Header />
 
       <Grid
-        item
+        item={true}
         xl={12}
         xs={12}
         style={{
@@ -96,7 +96,7 @@ const MealsList: React.FC = () => {
 
       <Grid container className={classes.container}>
         <Grid
-          item
+          item={true}
           xl={12}
           xs={12}
           style={{
@@ -108,7 +108,7 @@ const MealsList: React.FC = () => {
         >
           {currentMeals.map((meal: IMeals) => (
             <Grid
-              item
+              item={true}
               xs={12}
               lg={6}
               md={6}

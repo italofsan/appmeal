@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -29,7 +29,7 @@ const ListPages: React.FC<IProps> = ({
   }
 
   return (
-    <Grid item xl={12} xs={12} className={classes.paginationContainer}>
+    <Grid item={true} xl={12} xs={12} className={classes.paginationContainer}>
       <Pagination
         count={Math.ceil(totalMeals / mealsPerPage)}
         color='secondary'
